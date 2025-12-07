@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+
+model Property {
+  id          Int    @id @default(autoincrement())
+  name        String
+  type        String // Input text
+  isSpecial   String // Dropdown (e.g., "Yes", "No", "Featured")
+  description String @db.Text
+  status      String // Property status
+
+  // Relations
+  images        PropertyImage[]
+  amenities     Amenity[]
+  neighborhoods Neighborhood[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PropertyImage {
+  id          Int      @id @default(autoincrement())
+  url         String
+  isThumbnail Boolean  @default(false)
+  propertyId  Int
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+}
+
+model Amenity {
+  id         Int      @id @default(autoincrement())
+  name       String
+  photoUrl   String
+  propertyId Int
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+}
+
+model Neighborhood {
+  id          Int      @id @default(autoincrement())
+  name        String
+  time        String
+  description String? // Optional
+  iconType    String // Dropdown select
+  propertyId  Int
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+}
