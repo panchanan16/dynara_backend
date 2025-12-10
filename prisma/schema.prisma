@@ -13,7 +13,6 @@ datasource db {
   provider = "mysql"
 }
 
-
 model Property {
   id          Int    @id @default(autoincrement())
   name        String
@@ -26,9 +25,12 @@ model Property {
   images        PropertyImage[]
   amenities     Amenity[]
   neighborhoods Neighborhood[]
+  newLaunch     NewLauchProperty?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  rcproperty       RCProperty?
+  upcomingProperty UpcomingProperty?
 }
 
 model PropertyImage {
@@ -55,4 +57,37 @@ model Neighborhood {
   iconType    String // Dropdown select
   propertyId  Int
   property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+}
+
+model NewLauchProperty {
+  launch_id   Int      @id @default(autoincrement())
+  property_id Int      @unique
+  description String   @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+
+  @@map("newlaunch_properties")
+}
+
+model RCProperty {
+  rc_id       Int      @id @default(autoincrement())
+  property_id Int      @unique
+  type        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+
+  @@map("rc_properties")
+}
+
+model UpcomingProperty {
+  up_id       Int      @id @default(autoincrement())
+  property_id Int      @unique
+  date        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+
+  @@map("upcoming_properties")
 }

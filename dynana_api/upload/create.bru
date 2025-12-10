@@ -6,6 +6,10 @@ meta {
 
 post {
   url: {{urlHead}}/api/upload
-  body: none
+  body: multipartForm
   auth: inherit
+}
+
+body:multipart-form {
+  file: @file(C:\Users\panch\Downloads\profile 1.jpg)
 }
