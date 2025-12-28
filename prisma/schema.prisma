@@ -14,12 +14,18 @@ datasource db {
 }
 
 model Property {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   type        String // Input text
   isSpecial   String // Dropdown (e.g., "Yes", "No", "Featured")
-  description String @db.Text
-  status      String // Property status
+  description String  @db.Text
+  status      String
+  bedroom     Int?
+  bathroom    Int?
+  area        String?
+  price       String?
+  city        String?
+  address     String?
 
   // Relations
   images        PropertyImage[]
@@ -90,4 +96,17 @@ model UpcomingProperty {
   property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
 
   @@map("upcoming_properties")
+}
+
+model NewLaunches {
+  p_id           Int      @id @default(autoincrement())
+  property_type  String   
+  property_name  String
+  property_desc  String
+  property_photo String
+  property_link  String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("new_launch")
 }

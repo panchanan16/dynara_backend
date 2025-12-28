@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import propertyRoutes from './routes/property.routes'
 import uploadRoutes from './routes/upload.route'
+import newLaunchRouter from './routes/newLaunch.routes';
 
 const app = express();
 const PORT = process.env.PORT || 3500;
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/property', propertyRoutes)
 app.use('/api/upload', uploadRoutes)
+app.use('/api', newLaunchRouter)
 
 
 app.listen(PORT, () => {

@@ -6,6 +6,12 @@ interface CreatePropertyBody {
   name: string;
   type: string;
   isSpecial: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  price: string;
+  city?: string;
+  address?: string;
+  area: string;
   description: string;
   status: string;
   images: { url: string; isThumbnail: boolean }[];
@@ -20,7 +26,6 @@ interface CreatePropertyBody {
 
 export const createProperty = async (req: Request, res: Response) => {
   try {
-    console.log(req.body)
     const data = req.body as CreatePropertyBody;
 
     // Prisma "Nested Write" creates the property and all related data in one transaction
@@ -29,6 +34,12 @@ export const createProperty = async (req: Request, res: Response) => {
         name: data.name,
         type: data.type,
         isSpecial: data.isSpecial,
+        bathrooms: data.bathrooms,
+        bedrooms: data.bedrooms,
+        price: data.price,
+        city: data.city,
+        address: data.address,
+        area: data.area,        
         description: data.description,
         status: data.status,
         images: {

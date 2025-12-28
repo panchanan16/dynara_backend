@@ -1,0 +1,26 @@
+meta {
+  name: update
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{urlHead}}/api/top_properties/update/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 1
+}
+
+body:json {
+  {
+    "p_id": 2,
+    "property_type": "commercial",
+    "property_name": "Dubai lwra mall",
+    "property_desc": "this is the Dubai Mall description",
+    "property_photo_link": "/public/newLaunch/property_photo-1766919780273-912725039.jpeg",
+    "property_link": "ouhrghiehg"
+  }
+}

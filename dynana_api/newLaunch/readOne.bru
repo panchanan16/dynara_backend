@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: 
+  url: {{urlHead}}/api/top_properties/readOne/:id
   body: none
   auth: inherit
+}
+
+params:path {
+  id: 1
 }

@@ -5,7 +5,16 @@ meta {
 }
 
 post {
-  url: 
-  body: none
+  url: {{urlHead}}/api/top_properties/create
+  body: multipartForm
   auth: inherit
+}
+
+body:multipart-form {
+  property_name: Dubai mall
+  property_desc: this is the Dubai Mall description
+  property_photo: @file(C:\Users\panch\Downloads\jg.jpeg)
+  property_photo_link: 
+  property_link: fkhgherfgh
+  property_type: commercal
 }

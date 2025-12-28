@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE `property` ADD COLUMN `address` VARCHAR(191) NULL,
+    ADD COLUMN `area` VARCHAR(191) NULL,
+    ADD COLUMN `bathroom` INTEGER NULL,
+    ADD COLUMN `bedroom` INTEGER NULL,
+    ADD COLUMN `city` VARCHAR(191) NULL,
+    ADD COLUMN `price` VARCHAR(191) NULL;
